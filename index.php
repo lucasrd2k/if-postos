@@ -9,7 +9,7 @@
 </head>
 <!-- echo CONDIÇÃO ? "SE" : "ELSE"; - Echo condicional de uma linha -->
 <!-- Aqui é pra mudar a cor conforme a resposta do login msg=0 (erro) ou msg=1 (logado)-->
-                                    
+
 <body>
     <!-- section: Cadastro -->
     <section class="background-radial-gradient overflow-hidden">
@@ -67,7 +67,7 @@
                             <h1 class="mb-4 display-5 fw-bold ls-tight" style="color: 000">
                                 Login
                             </h1>
-                            <form>
+                            <form action="" method="POST"> 
                                 <div class="form-floating mb-3">
                                     <input name="email" type="text" class="form-control" id="floatingInput5" placeholder="Ceres">
                                     <label for="floatingInput5"> Email</label>
@@ -76,7 +76,7 @@
                                     <input name="senha" type="password" class="form-control" id="floatingInput6" placeholder="Ceres">
                                     <label for="floatingInput6"> Senha</label>
                                 </div>
-                                
+
                                 <div class="row mb-2">
                                     <div class="col-6"></div>
                                     <div class="col-6  text-end"><a class="small text-muted text-decoration-none" href="recuperar.php">Esqueceu a senha?</a></div>
@@ -86,7 +86,6 @@
                                     Entrar
                                 </button>
 
-                                <!-- Register buttons -->
                             </form>
                             <p class="small text-muted">Não possui conta? <a class="text-muted fw-bold text-decoration-none" href="cadastro.php">Criar conta</a></p>
                         </div>
@@ -95,6 +94,26 @@
             </div>
         </div>
     </section>
+    <?php
+        include_once "conexao.php";
+
+        if (isset($_POST['email'], $_POST['senha'])) {
+            $email = $_POST['email'];
+            $senha = md5($_POST['senha']);
+            $sql = "SELECT * FROM usuario WHERE email = \"$email\" and senha = \"$senha\"";
+            // echo $sql;
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $linha = mysqli_fetch_array($result);
+                session_start();
+                $_SESSION['nome'] = $linha['nome'];
+                $_SESSION['id'] = $linha['id'];
+                echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
+                // echo "<script>window.location.replace('dashboard.php');</script>";
+            }
+        }
+
+    ?>
     <!-- Section: Design Block -->
 </body>
 
