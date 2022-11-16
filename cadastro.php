@@ -3,15 +3,168 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
+    <title><?php echo isset($_GET['id']) ? "Edição de usuário" : "Cadastro de usuário";?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!-- Link tag chamando o arquivo css do bootstrap -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script do framework sweetalert -->
+    <script>
+        function login(){
+            window.location.replace('index.php');
+        }
+        function success(msg){
+            timeout = setTimeout(login, 3500);
+            Swal.fire(
+                'Tudo certo!',
+                msg,
+                'success'
+            )
+        }
+        function error(msg){
+            
+            Swal.fire(
+                msg,
+                'Verifique o preenchimento dos campos!',
+                'error'
+            )
+        }
+        // Criação das funções que mostra o alert indicando o resultado (erro ou sucesso) do cadastro
+        
+    </script>
+    
 </head>
 <!-- echo CONDIÇÃO ? "SE" : "ELSE"; - Echo condicional de uma linha -->
 <!-- Aqui é pra mudar a cor conforme a resposta do login msg=0 (erro) ou msg=1 (logado)-->
                                     
 <body>
+    
+<?php
+        include_once "conexao.php";
+        
+        $nome = "";
+        $cidade = "";
+        $cep = "";
+        $telefone = "";
+        $email = "";
+
+        // Definição das variáveis vazias pra não dar erro no cadastro e o layout servir para cadastro e edição
+
+        if (isset($_GET['id'])) {
+            // Se o id foi enviado, é uma edição de usuário, portanto fazemos o select e buscamos os dados
+            $id = $_GET['id'];
+            $sql = "SELECT * FROM usuario WHERE id = $id;";
+            $result = mysqli_query($conn, $sql);
+            $linha = mysqli_fetch_array($result);
+            $nome = $linha['nome'];
+            $cidade = $linha['cidade'];
+            $cep = $linha['cep'];
+            $telefone = $linha['telefone'];
+            $email = $linha['email'];
+            
+            $sql = "UPDATE usuario SET ";
+            $edit = false;
+            
+            // Apenas os dados enviados são editados, e o comando vai sendo escrito
+
+            if (isset($_POST['nome'])) {
+                $nome = $_POST['nome'];
+                $sql .= "nome = '$nome'";
+                $edit = true;
+            }
+            if (isset($_POST['cidade'])) {
+                $cidade = $_POST['cidade'];
+                if ($edit) {
+                    $sql .= ",";
+                }
+                $sql .= "cidade = '$cidade'";
+                $edit = true;
+            }
+            if (isset($_POST['cep'])) {
+                $cep = $_POST['cep'];
+                if ($edit) {
+                    $sql .= ",";
+                }
+                $sql .= "cep = '$cep'";
+                $edit = true;
+            }
+            if (isset($_POST['telefone'])) {
+                $telefone = $_POST['telefone'];
+                if ($edit) {
+                    $sql .= ",";
+                }
+                $sql .= "telefone = '$telefone'";
+                $edit = true;
+            }
+            if (isset($_POST['email'])) {
+                $email = $_POST['email'];
+                if ($edit) {
+                    $sql .= ",";
+                }
+                $sql .= "email = '$email'";
+                $edit = true;
+            }
+            if (isset($_POST['senha'], $_POST['confSenha'])) {    
+                if($_POST['senha'] != $_POST['confSenha']){
+                    echo "<script>error('As senhas não conferem');</script>";
+                }
+                else{
+                    $senha = md5($_POST['senha']);
+                    if ($edit) {
+                        $sql .= ",";
+                    }
+                    $sql .= "senha = '$senha'";
+                    $edit = true;
+                }
+            }
+            
+            
+            if ($edit) {
+
+                $sql .= " WHERE id = $id;";
+                echo $sql;
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>success('Edição efetuada com sucesso!');</script>";
+                } else {
+                    $msg = "Erro ao editar.";
+                    echo "<script>error('$msg');</script>";
+                    $m = true;
+                }
+            }
+        }
+        else if (isset($_POST['nome'], $_POST['cidade'], $_POST['cep'], $_POST['telefone'], $_POST['email']
+        , $_POST['senha'], $_POST['confSenha'])) {
+            // echo "Obteve as infos";
+            if ($_POST['senha'] != $_POST['confSenha']){
+                echo "<script>error('As senhas não conferem');</script>";
+            }
+            else{
+                
+                $nome = $_POST['nome'];
+                $cidade = $_POST['cidade'];
+                $cep = $_POST['cep'];
+                $telefone = $_POST['telefone'];
+                $email = $_POST['email'];
+                $senha = md5($_POST['senha']);
+
+                $sql = "INSERT INTO usuario (nome, cidade, cep, telefone, email, senha) VALUES ('$nome', '$cidade', '$cep', '$telefone', '$email', '$senha');";
+                // echo $sql;
+                if (mysqli_query($conn, $sql)) {
+    
+                    echo "<script>success('Cadastro efetuado com sucesso!');</script>";
+                }
+                else {
+                    $msg = "Erro ao cadastrar usuário.";
+                    echo "<script>error('$msg');</script>";
+                    $m = true;
+                }
+            }
+        }
+        
+        
+    ?>
+
     <!-- section: Cadastro -->
+    
     <section class="background-radial-gradient overflow-hidden">
         <style>
             .background-radial-gradient {
@@ -65,44 +218,54 @@
                     <div class="card bg-glass">
                         <div class="text-center card-body px-4 pt-5 px-md-5">
                             <h1 class="mb-4 display-5 fw-bold ls-tight" style="color: 000">
-                                Cadastro
+                                <?php echo isset($_GET['id']) ? "Edição" : "Cadastro";?>
                             </h1>
-                            <form>
+                            <form action="" method="POST">
                                 <div class="form-floating mb-3">
-                                    <input name="nome" type="text" class="form-control" id="floatingInput1" placeholder="João Silva Alberto">
+                                    <input value="<?php echo $nome;?>" name="nome" type="text" class="form-control" id="floatingInput1" placeholder="João Silva Alberto">
                                     <label for="floatingInput1"> Nome completo</label>
                                 </div>
 
+                                    
                                 <div class="form-floating mb-3">
-                                    <input name="cidade" type="text" class="form-control" id="floatingInput2" placeholder="Ceres">
-                                    <label for="floatingInput2"> Cidade</label>
-                                </div>
-
+                                    <select name="cidade" class="form-control">
+                                        <?php
+                                        $sql = "SELECT * FROM cidade";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($linha = mysqli_fetch_array($result)) {
+                                            $idc = $linha['id'];
+                                            $nome = $linha['nome'];
+                                            $txt = $idc == $cidade ? "selected" : "";
+                                            echo "<option value=\"$idc\" $txt>$nome</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                    </div>
                                 <div class="form-floating mb-3">
-                                    <input name="cep" type="text" class="form-control" id="floatingInput3" placeholder="Ceres">
+                                    <input  value="<?php echo $cep;?>"  name="cep" type="text" class="form-control" id="floatingInput3" placeholder="Ceres">
                                     <label for="floatingInput3"> Cep</label>
                                 </div>
 
                                 <div class="form-floating mb-5">
-                                    <input name="telefone" type="text" class="form-control" id="floatingInput4" placeholder="Ceres">
+                                    <input  value="<?php echo $telefone;?>"  name="telefone" type="text" class="form-control" id="floatingInput4" placeholder="Ceres">
                                     <label for="floatingInput4"> Telefone</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input name="email" type="text" class="form-control" id="floatingInput5" placeholder="Ceres">
+                                    <input  value="<?php echo $email;?>"  name="email" type="text" class="form-control" id="floatingInput5" placeholder="Ceres">
                                     <label for="floatingInput5"> Email</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input name="senha" type="password" class="form-control" id="floatingInput6" placeholder="Ceres">
-                                    <label for="floatingInput6"> Senha</label>
+                                    <label for="floatingInput6"> Senha <?php echo isset($_GET['id']) ? "(caso deseje alterar)" : "";?></label>
                                 </div>
                                 <div class="form-floating mb-5">
                                     <input name="confSenha" type="password" class="form-control" id="floatingInput7" placeholder="Ceres">
-                                    <label for="floatingInput7"> Confirmação da senha</label>
+                                    <label for="floatingInput7"> Confirmação da senha <?php echo isset($_GET['id']) ? "(caso deseje alterar)" : "";?></label>
                                 </div>
 
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-secondary btn-block mb-4 rounded-pill px-5">
-                                    Cadastrar
+                                    <?php echo isset($_GET['id']) ? "Editar" : "Cadastrar";?>
                                 </button>
 
                                 <!-- Register buttons -->
@@ -114,6 +277,8 @@
         </div>
     </section>
     <!-- Section: Design Block -->
+    
+        
 </body>
 
 </html>
