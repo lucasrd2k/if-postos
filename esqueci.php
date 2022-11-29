@@ -1,18 +1,21 @@
+<?php
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
+    <title>Recuperação de senha</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!-- Link tag chamando o arquivo css do bootstrap -->
-</head>
-<!-- echo CONDIÇÃO ? "SE" : "ELSE"; - Echo condicional de uma linha -->
-<!-- Aqui é pra mudar a cor conforme a resposta do login msg=0 (erro) ou msg=1 (logado)-->
 
+</head>
 
 <body>
-    <!-- section: Cadastro -->
+    <!-- section: Recuperação de senha -->
+
     <section class="background-radial-gradient overflow-hidden">
         <style>
             .background-radial-gradient {
@@ -56,7 +59,7 @@
             }
         </style>
 
-        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="container px-4 py-3 px-md-5 text-center text-lg-start my-5">
             <div class="row gx-lg-5 align-items-center mb-5">
 
                 <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
@@ -65,60 +68,35 @@
 
                     <div class="card bg-glass">
                         <div class="text-center card-body px-4 pt-5 px-md-5">
-                            <h1 class="mb-4 display-5 fw-bold ls-tight" style="color: 000">
-                                Login
-                            </h1>
-                            <form action="" method="POST">
+                            <h4 class="mb-2 fw-bold ls-tight" style="color: 000">Recuperação de senha</h4>
+                            <form class="py-4" action="confirmacao.php" method="POST">
                                 <div class="form-floating mb-3">
-                                    <input name="email" type="text" class="form-control" id="floatingInput5" placeholder="Ceres">
-                                    <label for="floatingInput5"> Email</label>
-                                </div>
-                                <div class="form-floating mb-1">
-                                    <input name="senha" type="password" class="form-control" id="floatingInput6" placeholder="Ceres">
-                                    <label for="floatingInput6"> Senha</label>
+                                    <input name="email" type="text" class="form-control" id="floatingInput5" placeholder="email@example.com">
+                                    <label for="floatingInput5"> Email cadastrado</label>
                                 </div>
 
-                                <div class="row mb-2">
-                                    <div class="col-6"></div>
-                                    <div class="col-6  text-end"><a class="small text-muted text-decoration-none" href="esqueci.php">Esqueceu a senha?</a></div>
+                                <div class="row my-2">
+                                    <div class="col-2"></div>
+                                    <div class="col-8">
+                                        <h4 class="my-4" style="color: #696969">Fique tranquilo !<br> Vamos lhe enviar um<br>email contendo o<br>código de confirmação<br>para recuperação da senha</h4>
+                                    </div>
+                                    <div class="col-2"></div>
                                 </div>
+
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-secondary btn-block mb-4 rounded-pill px-5">
-                                    Entrar
-                                </button>
+                                <button type="submit" class="btn btn-secondary btn-block mb-4 rounded-pill px-5">Enviar código</button>
 
+                                <!-- Register buttons -->
                             </form>
-                            <p class="small text-muted">Não possui conta? <a class="text-muted fw-bold text-decoration-none" href="cadastro.php">Criar conta</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <?php
-    include_once "conexao.php";
-
-    if (isset($_POST['email'], $_POST['senha'])) {
-        $email = $_POST['email'];
-        $senha = md5($_POST['senha']);
-        $sql = "SELECT * FROM usuario WHERE email = \"$email\" and senha = \"$senha\"";
-        // echo $sql;
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            $linha = mysqli_fetch_array($result);
-
-            session_start(); //Iniciando a sessão
-            $_SESSION['nome'] = $linha['nome'];
-            $_SESSION['id'] = $linha['id'];
-            session_write_close(); //Fechando o registro na sessão após a escrita
-
-            echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
-            // echo "<script>window.location.replace('dashboard.php');</script>";
-        }
-    }
-
-    ?>
     <!-- Section: Design Block -->
+
+
 </body>
 
 </html>
