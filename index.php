@@ -112,8 +112,26 @@
             $_SESSION['id'] = $linha['id'];
             session_write_close(); //Fechando o registro na sessão após a escrita
 
-            echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
-            // echo "<script>window.location.replace('dashboard.php');</script>";
+            //echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
+            echo "<script>window.location.replace('dashboard.php');</script>";
+        }
+        else{
+            $sql = "SELECT * FROM admin WHERE email = \"$email\" and senha = \"$senha\"";
+            $result = mysqli_query($conn, $sql);
+            
+            if (mysqli_num_rows($result) > 0) {
+                $linha = mysqli_fetch_array($result);
+    
+                session_start(); //Iniciando a sessão
+                $_SESSION['nome'] = $linha['nome'];
+                $_SESSION['id'] = $linha['id'];
+                $_SESSION['adm']=true;
+                session_write_close(); //Fechando o registro na sessão após a escrita
+    
+                //echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
+                echo "<script>window.location.replace('index.html');</script>";
+            }
+        
         }
     }
 

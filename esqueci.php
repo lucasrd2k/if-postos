@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +67,7 @@
                             <h4 class="mb-2 fw-bold ls-tight" style="color: 000">Recuperação de senha</h4>
                             <form class="py-4" action="confirmacao.php" method="POST">
                                 <div class="form-floating mb-3">
-                                    <input name="email" type="text" class="form-control" id="floatingInput5" placeholder="email@example.com">
+                                    <input value="<?php echo isset($_GET['email']) ? $_GET['email'] : ""; ?>" name="email" type="text" class="form-control" id="floatingInput5" placeholder="email@example.com">
                                     <label for="floatingInput5"> Email cadastrado</label>
                                 </div>
 

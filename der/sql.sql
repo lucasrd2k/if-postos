@@ -1,8 +1,10 @@
 -- DROP DATABASE postos;
 
 CREATE DATABASE postos;
-
 USE postos;
+select * from usuario;
+
+
 
 CREATE TABLE IF NOT EXISTS cidade (
   id INT NOT NULL AUTO_INCREMENT,
@@ -37,4 +39,48 @@ INSERT INTO cidade (id, nome) VALUES ('3', 'Rianápolis');
 
 INSERT INTO usuario VALUES (NULL, 'nome', '1', '76300000', '298938383', 'email@email.email', md5('senha'));
 
-SELECT * FROM usuario;
+CREATE TABLE IF NOT EXISTS admin (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id));
+
+INSERT INTO admin VALUES (NULL, 'Lucas', 'email@email.email', md5('email'));
+
+CREATE TABLE IF NOT EXISTS bandeira (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id));
+
+CREATE TABLE IF NOT EXISTS posto (
+  id INT NOT NULL,
+  nome VARCHAR(45) NOT NULL,
+  cidade INT NOT NULL,
+  cep VARCHAR(45) NOT NULL,
+  endereco VARCHAR(45) NOT NULL,
+  bandeira INT NOT NULL,
+  etanol DECIMAL(8,2) NOT NULL,
+  diesels500 DECIMAL(8,2) NOT NULL,
+  diesels10 DECIMAL(8,2) NOT NULL,
+  gasolina DECIMAL(8,2) NOT NULL,
+  admin INT NOT NULL,
+  PRIMARY KEY (id),
+  INDEX fk_posto_cidade1_idx (cidade ASC),
+  INDEX fk_posto_bandeira1_idx (bandeira ASC),
+  INDEX fk_posto_admin1_idx (admin ASC),
+  CONSTRAINT fk_posto_cidade1 FOREIGN KEY (cidade) REFERENCES cidade (id) ON DELETE NO ACTION ON UPDATE NO ACTION, 
+  CONSTRAINT fk_posto_bandeira1 FOREIGN KEY (bandeira) REFERENCES bandeira (id) ON DELETE NO ACTION ON UPDATE NO ACTION, 
+  CONSTRAINT fk_posto_admin1 FOREIGN KEY (admin) REFERENCES admin (id) ON DELETE NO ACTION ON UPDATE NO ACTION);
+    
+CREATE TABLE IF NOT EXISTS pedido (
+  id INT NOT NULL AUTO_INCREMENT,
+  etanol DECIMAL(8,2) NOT NULL,
+  gasolina DECIMAL(8,2) NOT NULL,
+  diesels500 DECIMAL(8,2) NOT NULL,
+  diesels10 VARCHAR(45) NOT NULL,
+  posto INT NOT NULL,
+  PRIMARY KEY (id),
+  INDEX fk_pedido_posto1_idx (posto ASC),
+  CONSTRAINT fk_pedido_posto1 FOREIGN KEY (posto) REFERENCES posto (id) 
+  ON DELETE NO ACTION ON UPDATE NO ACTION);
