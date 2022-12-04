@@ -7,10 +7,10 @@ Próximos passos:
 
 1. Implementar banco/php do cadastro/edição e login (OK)
 2. Implementar recuperação de senha via email (OK)
-2. Implementar visual da página principal do adm (próximo)
-3. Implementar visual da página principal do cliente
-4. Implementar banco/php das páginas principais
-5....
+3. Implementar visual da página principal do adm (OK)
+4. Implementar visual da página principal do cliente (Em andamento)
+5. Implementar banco das páginas principais (OK)
+6. Implementar php das páginas principais...
 
 Instruções:
 
