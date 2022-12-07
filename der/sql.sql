@@ -90,7 +90,7 @@ INSERT INTO `postos`.`bandeira` (`id`, `nome`) VALUES ('1', 'Petrobrás');
 INSERT INTO `postos`.`bandeira` (`id`, `nome`) VALUES ('2', 'Shell');
 
 INSERT INTO `postos`.`posto` (`id`, `nome`, `cidade`, `cep`, `endereco`, `bandeira`, `etanol`, `diesels500`, `diesels10`, `gasolina`, `admin`) VALUES ('1', 'Posto wk', '1', '76300000', 'Avenida', '1', '2.90', '2.90', '2.90', '5.40', '1');
-INSERT INTO `postos`.`posto` (`id`, `nome`, `cidade`, `cep`, `endereco`, `bandeira`, `etanol`, `diesels500`, `diesels10`, `gasolina`, `admin`) VALUES ('2', 'Posto wk', '1', '76300000', 'Avenida', '1', '2.90', '2.90', '2.90', '5.40', '1');
+INSERT INTO `postos`.`posto` (`id`, `nome`, `cidade`, `cep`, `endereco`, `bandeira`, `etanol`, `diesels500`, `diesels10`, `gasolina`, `admin`) VALUES ('2', 'Posto da biquinha', '1', '76300000', 'Avenida', '1', '2.67', '2.48', '3.23', '4.70', '1');
 
   
-  
+SELECT min(gasolina) as precoMin, max(gasolina) as precoMax FROM posto;

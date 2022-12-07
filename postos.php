@@ -1,9 +1,13 @@
+<?php
+	include_once "conexao.php";
+	include_once "sessionAdm.php";
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv=”content-type” content="text/html;" />
+	<meta http-equiv="content-type" content="text/html;" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="keywords" content="palavras, chave, pesquisa, google" />
 	<title>Postos cadastrados</title>
@@ -73,7 +77,6 @@
 			<div class="col-4 fw-bold">Ação</div>
 		</div>
 		<?php
-			include_once "conexao.php";
 			$sql = "SELECT * FROM posto;";
 			$result = mysqli_query($conn, $sql);
 			while($linha = mysqli_fetch_array($result)){
