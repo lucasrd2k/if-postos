@@ -1,3 +1,6 @@
+<?php
+	include_once "sessionAdm.php";
+?>
 <!DOCTYPE html>
 <html>
 

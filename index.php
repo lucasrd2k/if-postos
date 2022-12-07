@@ -1,19 +1,76 @@
+<?php
+    include_once "conexao.php";
+
+    if (isset($_POST['email'], $_POST['senha'])) {
+        $email = $_POST['email'];
+        $senha = md5($_POST['senha']);
+        $sql = "SELECT * FROM usuario WHERE email = \"$email\" and senha = \"$senha\"";
+        // echo $sql;
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $linha = mysqli_fetch_array($result);
+
+            session_start(); //Iniciando a sessão
+            $_SESSION['nome'] = $linha['nome'];
+            $_SESSION['id'] = $linha['id'];
+            session_write_close(); //Fechando o registro na sessão após a escrita
+
+            //echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
+            echo "<script>window.location.replace('home.php');</script>";
+        } else {
+            $sql = "SELECT * FROM admin WHERE email = \"$email\" and senha = \"$senha\"";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                $linha = mysqli_fetch_array($result);
+
+                session_start(); //Iniciando a sessão
+                $_SESSION['nome'] = $linha['nome'];
+                $_SESSION['id'] = $linha['id'];
+                $_SESSION['adm'] = true;
+                session_write_close(); //Fechando o registro na sessão após a escrita
+
+                // echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
+                echo "<script>window.location.replace('dashAdm.php');</script>";
+            }
+        }
+    }
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
+	<meta charset="utf-8">
+	<meta http-equiv=”content-type” content="text/html;" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="keywords" content="palavras, chave, pesquisa, google" />
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- Link tag chamando o arquivo css do bootstrap -->
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+
+	<!-- ESTILOS PARA ESTA PÁGINA -->
+	<!-- Adição do material icons pra usar os ícones na navbar -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!-- JAVASCRIPT E JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
 </head>
-<!-- echo CONDIÇÃO ? "SE" : "ELSE"; - Echo condicional de uma linha -->
-<!-- Aqui é pra mudar a cor conforme a resposta do login msg=0 (erro) ou msg=1 (logado)-->
 
-
-<body>
-    <!-- section: Cadastro -->
-    <section class="background-radial-gradient overflow-hidden">
+<body style="background-color: #000;">
+	<main class="">
+	<section class="background-radial-gradient overflow-hidden">
         <style>
             .background-radial-gradient {
                 background-color: hsl(218, 41%, 15%);
@@ -55,8 +112,8 @@
                 backdrop-filter: saturate(200%) blur(25px);
             }
         </style>
-
         <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+            <br><br><br><br><br>
             <div class="row gx-lg-5 align-items-center mb-5">
 
                 <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
@@ -93,50 +150,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><br><br><br><br>
     </section>
-    <?php
-    include_once "conexao.php";
+	</main>	
 
-    if (isset($_POST['email'], $_POST['senha'])) {
-        $email = $_POST['email'];
-        $senha = md5($_POST['senha']);
-        $sql = "SELECT * FROM usuario WHERE email = \"$email\" and senha = \"$senha\"";
-        // echo $sql;
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            $linha = mysqli_fetch_array($result);
 
-            session_start(); //Iniciando a sessão
-            $_SESSION['nome'] = $linha['nome'];
-            $_SESSION['id'] = $linha['id'];
-            session_write_close(); //Fechando o registro na sessão após a escrita
-
-            //echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
-            echo "<script>window.location.replace('dashboard.php');</script>";
-        }
-        else{
-            $sql = "SELECT * FROM admin WHERE email = \"$email\" and senha = \"$senha\"";
-            $result = mysqli_query($conn, $sql);
-            
-            if (mysqli_num_rows($result) > 0) {
-                $linha = mysqli_fetch_array($result);
-    
-                session_start(); //Iniciando a sessão
-                $_SESSION['nome'] = $linha['nome'];
-                $_SESSION['id'] = $linha['id'];
-                $_SESSION['adm']=true;
-                session_write_close(); //Fechando o registro na sessão após a escrita
-    
-                //echo "<script>alert(\"Sessão registrada, redirecionamento agora\");</script>";
-                echo "<script>window.location.replace('index.html');</script>";
-            }
-        
-        }
-    }
-
-    ?>
-    <!-- Section: Design Block -->
 </body>
 
 </html>
+

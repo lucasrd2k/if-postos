@@ -8,9 +8,12 @@ Próximos passos:
 1. Implementar banco/php do cadastro/edição e login (OK)
 2. Implementar recuperação de senha via email (OK)
 3. Implementar visual da página principal do adm (OK)
-4. Implementar visual da página principal do cliente (Em andamento)
+4. Implementar visual da página principal do cliente (OK)
 5. Implementar banco das páginas principais (OK)
 6. Implementar php das páginas principais...
+   1. Tela meio com o google maps
+   2. Pedido de mudança no preço
+   3. Tela de autorização de mudança
 
 Instruções:
 
