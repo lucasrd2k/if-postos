@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <title><?php echo isset($_GET['id']) ? "Edição de usuário" : "Cadastro de usuário";?></title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- Link tag chamando o arquivo css do bootstrap -->
+	<meta charset="utf-8">
+	<meta http-equiv=”content-type” content="text/html;" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="keywords" content="palavras, chave, pesquisa, google" />
+	<title>Dashboard</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+
+	<!-- ESTILOS PARA ESTA PÁGINA -->
+	<!-- Adição do material icons pra usar os ícones na navbar -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!-- JAVASCRIPT E JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Script do framework sweetalert -->
     <script>
@@ -31,16 +52,14 @@
         // Criação das funções que mostra o alert indicando o resultado (erro ou sucesso) do cadastro
         
     </script>
-    
 </head>
-<!-- echo CONDIÇÃO ? "SE" : "ELSE"; - Echo condicional de uma linha -->
-<!-- Aqui é pra mudar a cor conforme a resposta do login msg=0 (erro) ou msg=1 (logado)-->
-                                    
-<body>
-    
-<?php
-        include_once "conexao.php";
+
+<body style="background-color: #000;">
+	<main class="">
+    <?php
         
+        include_once "conexao.php";
+            
         $nome = "";
         $cidade = "";
         $cep = "";
@@ -149,7 +168,7 @@
                 $sql = "INSERT INTO usuario (nome, cidade, cep, telefone, email, senha) VALUES ('$nome', '$cidade', '$cep', '$telefone', '$email', '$senha');";
                 // echo $sql;
                 if (mysqli_query($conn, $sql)) {
-    
+
                     echo "<script>success('Cadastro efetuado com sucesso!');</script>";
                 }
                 else {
@@ -161,11 +180,10 @@
         }
         
         
-    ?>
 
-    <!-- section: Cadastro -->
-    
-    <section class="background-radial-gradient overflow-hidden">
+    ?>
+		
+    <section class="container-fluid background-radial-gradient overflow-hidden">
         <style>
             .background-radial-gradient {
                 background-color: hsl(218, 41%, 15%);
@@ -276,9 +294,10 @@
             </div>
         </div>
     </section>
-    <!-- Section: Design Block -->
-    
-        
+	</main>	
+
+
+
 </body>
 
 </html>
