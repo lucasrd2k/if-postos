@@ -114,7 +114,7 @@
 		</div>
 		
 		<?php
-			$sql = "SELECT nome, endereco, cidade,$filtro as preco FROM posto ORDER BY $filtro ASC";		
+			$sql = "SELECT c.nome as city, id, nome, endereco, cidade, $filtro as preco FROM posto p JOIN cidade c ON p.cidade = c.id ORDER BY $filtro ASC";		
 			$result = mysqli_query($conn, $sql);
 			$primeiro = true;
 			$mb = true; //Mais barato
@@ -122,9 +122,10 @@
 				if ($primeiro){
 					$primeiro = false;
 				}
+				$id = $linha['id'];
 				$nome = $linha['nome'];
 				$endereco = $linha['endereco'];
-				$cidade = $linha['cidade'];
+				$cidade = $linha['city'];
 				$preco = $linha['preco'];
 				$mc = $preco == $max ? true : false;
 		?>
@@ -137,7 +138,7 @@
 				<h2><?php echo $nome;?></h2>
 
 			</div>
-			<div class="col-5"  onclick="window.location.replace('autoriza.html')">
+			<div class="col-5"  onclick="window.location.replace('info.php?id=<?php echo $id;?>')">
 				<h2>R$ <?php echo $preco;?></h2>
 				<?php echo $mb ? "<h4 style='color:greenyellow;'>Mais barato</h4>":"";?>
 				<?php echo $mc ? "<h4 style='color:red;'>Mais caro</h4>":"";?>
