@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS bandeira (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
-
+  
 CREATE TABLE IF NOT EXISTS posto (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   cidade INT NOT NULL,
   cep VARCHAR(45) NOT NULL,
@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS posto (
   CONSTRAINT fk_posto_bandeira1 FOREIGN KEY (bandeira) REFERENCES bandeira (id) ON DELETE NO ACTION ON UPDATE NO ACTION, 
   CONSTRAINT fk_posto_admin1 FOREIGN KEY (admin) REFERENCES admin (id) ON DELETE NO ACTION ON UPDATE NO ACTION);
     
+    
 CREATE TABLE IF NOT EXISTS pedido (
   id INT NOT NULL AUTO_INCREMENT,
   etanol DECIMAL(8,2) NOT NULL,
@@ -84,3 +85,12 @@ CREATE TABLE IF NOT EXISTS pedido (
   INDEX fk_pedido_posto1_idx (posto ASC),
   CONSTRAINT fk_pedido_posto1 FOREIGN KEY (posto) REFERENCES posto (id) 
   ON DELETE NO ACTION ON UPDATE NO ACTION);
+  
+INSERT INTO `postos`.`bandeira` (`id`, `nome`) VALUES ('1', 'Petrobrás');
+INSERT INTO `postos`.`bandeira` (`id`, `nome`) VALUES ('2', 'Shell');
+
+INSERT INTO `postos`.`posto` (`id`, `nome`, `cidade`, `cep`, `endereco`, `bandeira`, `etanol`, `diesels500`, `diesels10`, `gasolina`, `admin`) VALUES ('1', 'Posto wk', '1', '76300000', 'Avenida', '1', '2.90', '2.90', '2.90', '5.40', '1');
+INSERT INTO `postos`.`posto` (`id`, `nome`, `cidade`, `cep`, `endereco`, `bandeira`, `etanol`, `diesels500`, `diesels10`, `gasolina`, `admin`) VALUES ('2', 'Posto wk', '1', '76300000', 'Avenida', '1', '2.90', '2.90', '2.90', '5.40', '1');
+
+  
+  
