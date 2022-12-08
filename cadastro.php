@@ -31,7 +31,7 @@
     <!-- Script do framework sweetalert -->
     <script>
         function login(){
-            window.location.replace('index.php');
+            window.location.replace('home.php');
         }
         function success(msg){
             timeout = setTimeout(login, 3500);
@@ -140,7 +140,7 @@
             if ($edit) {
 
                 $sql .= " WHERE id = $id;";
-                echo $sql;
+                // echo $sql;
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>success('Edição efetuada com sucesso!');</script>";
                 } else {

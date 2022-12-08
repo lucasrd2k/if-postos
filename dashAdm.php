@@ -76,7 +76,7 @@
         <div class="row  mt-3">
 			<div class="col"></div>
             <div class="col-md-6 col-xs-8">
-                <button  onclick="window.location.href='postos.html'" class="w-100 btn btn-lg btn-secondary">
+                <button  onclick="window.location.href='postos.php'" class="w-100 btn btn-lg btn-secondary">
                     Listagem de postos
                 </button>
             </div>

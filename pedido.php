@@ -1,3 +1,8 @@
+<?php
+
+include_once "conexao.php";
+include_once "session.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +11,7 @@
     <meta http-equiv=”content-type” content="text/html;" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="keywords" content="palavras, chave, pesquisa, google" />
-    <title>Dashboard</title>
+    <title>Pedido de alteração</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,12 +30,12 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Script do framework sweetalert -->
     <script>
-        function autoriza() {
-            window.location.replace('autoriza.php');
+        function home() {
+            window.location.replace('home.php');
         }
 
         function success(msg) {
-            timeout = setTimeout(autoriza, 3500);
+            timeout = setTimeout(home, 3500);
             Swal.fire(
                 'Tudo certo!',
                 msg,
@@ -51,11 +56,40 @@
 </head>
 
 <body style="background-color: #000;">
+
+    <nav class="navbar navbar-dark float-end d-inline" style="padding-right:2vw;background-color: rgb(75, 100, 145);">
+
+    </nav>
+    <nav class="navbar navbar-dark float-end d-inline" style="z-index:1000;padding-right:2vw;background-color: rgb(75, 100, 145);">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <nav class="navbar" style="padding-left:2vw;background-color: rgb(75, 100, 145);">
+        <button class="navbar-btn btn btn-md pb-1" style="color:white;" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent2" aria-controls="navbarToggleExternalContent2" aria-expanded="false" aria-label="Alterna navegação">
+            Filtros
+        </button>
+    </nav>
+    <nav id="navbarToggleExternalContent" class="collapse">
+        <ul class="nav navbar-nav ">
+            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="cadastro.php?id=<?php echo $iduser; ?>">Editar
+                    perfil</a></li>
+            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="home.php">Lista de
+                    postos</a></li>
+        </ul>
+    </nav>
+    <nav id="navbarToggleExternalContent2" class="collapse">
+        <ul class="nav navbar-nav ml-4">
+            <li><a class="btn-sm btn bg-dark float-start border-2" style="width:20vw;color:white;" href="home.php?filtro=etanol">Etanol</a></li>
+            <li><a class="btn-sm btn bg-dark float-start border-2" style="width:20vw;color:white;" href="home.php?filtro=gasolina">Gasolina</a></li>
+            <li><a class="btn-sm btn bg-dark float-start border-2" style="width:20vw;color:white;" href="home.php?filtro=diesels500">Diesel S500</a></li>
+            <li><a class="btn-sm btn bg-dark float-start border-2" style="width:20vw;color:white;" href="home.php?filtro=diesels10">Diesel S10</a></li>
+        </ul>
+    </nav>
     <main class="">
+
+
         <?php
-
-        include_once "conexao.php";
-
 
         // Definição das variáveis vazias pra não dar erro no cadastro e o layout servir para cadastro e edição
 
@@ -71,9 +105,8 @@
             if (mysqli_query($conn, $sql)) {
 
                 echo "<script>success('Pedido cadastrado com sucesso!');</script>";
-            } 
-            else {
-                $msg = "Erro ao cadastrar usuário.";
+            } else {
+                $msg = "Erro ao cadastrar pedido.";
                 echo "<script>error('$msg');</script>";
                 $m = true;
             }

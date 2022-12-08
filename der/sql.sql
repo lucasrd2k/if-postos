@@ -1,8 +1,7 @@
--- DROP DATABASE postos;
+DROP DATABASE postos;
 
 CREATE DATABASE postos;
 USE postos;
-select * from usuario;
 
 
 
@@ -37,7 +36,7 @@ INSERT INTO cidade (id, nome) VALUES ('3', 'Rianápolis');
 
 -- Insert de usuário para testes
 
-INSERT INTO usuario VALUES (NULL, 'nome', '1', '76300000', '298938383', 'email@email.email', md5('senha'));
+INSERT INTO usuario VALUES (NULL, 'nome', '1', '76300000', '298938383', 'usuario@email.email', md5('senha'));
 
 CREATE TABLE IF NOT EXISTS admin (
   id INT NOT NULL AUTO_INCREMENT,
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS admin (
   senha VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
 
-INSERT INTO admin VALUES (NULL, 'Lucas', 'email@email.email', md5('email'));
+INSERT INTO admin VALUES (NULL, 'Teste', 'admin@email.email', md5('senha'));
 
 CREATE TABLE IF NOT EXISTS bandeira (
   id INT NOT NULL AUTO_INCREMENT,

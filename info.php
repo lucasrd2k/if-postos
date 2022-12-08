@@ -1,6 +1,6 @@
 <?php
 include_once "conexao.php";
-// include_once "session.php";
+include_once "session.php";
 
 $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : "etanol"; //Operador ternário, armazena o filtro ou o padrão
 
@@ -51,14 +51,13 @@ $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : "etanol"; //Operador terná
         </button>
     </nav>
     <nav id="navbarToggleExternalContent" class="collapse">
-        <ul class="nav navbar-nav ">
-            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="cadastro.php?id=">Editar
-                    perfil</a></li>
-            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="#">Lista de
-                    postos</a></li>
-            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="#">Atualização de
-                    preços</a></li>
-        </ul>
+    <ul class="nav navbar-nav ">
+			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;"
+					href="cadastro.php?id=<?php echo $iduser;?>">Editar
+					perfil</a></li>
+			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="home.php">Lista de
+					postos</a></li>
+		</ul>
     </nav>
 
     <main class="container-fluid bg-white py-3 mt-3">
