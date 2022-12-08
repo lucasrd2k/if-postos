@@ -53,8 +53,8 @@
 	</nav>
 	<nav id="navbarToggleExternalContent" class="collapse">
 		<ul class="nav navbar-nav ">
-			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="index.html">Lista de postos</a></li>
-			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="atualiza.html">Atualização de preços</a></li>
+        <li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="postos.php">Lista de postos</a></li>
+			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="autoriza.php">Atualização de preços</a></li>
 		</ul>
 	</nav>
 	<main class="container-fluid">
@@ -66,7 +66,7 @@
 		<div class="row  mt-5">
 			<div class="col"></div>
             <div class="col-md-6 col-xs-8">
-                <button onclick="window.location.href='autoriza.html'" class="w-100 btn btn-lg btn-secondary">
+                <button onclick="window.location.href='autoriza.php';" class="w-100 btn btn-lg btn-secondary">
                     Aprovar alteração de valores
                 </button>
             </div>

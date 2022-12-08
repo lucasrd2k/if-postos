@@ -47,7 +47,7 @@
 		</button>
 	</nav>
 	<nav class="navbar" style="padding-left:2vw;background-color: rgb(75, 100, 145);">
-		<button class="navbar-btn btn btn-md pb-1" style="color:white;" type="button">
+		<button onclick="history.go(-1);" class="navbar-btn btn btn-md pb-1" style="color:white;" type="button">
 			<span class="material-icons">
 				arrow_back
 			</span>
@@ -55,10 +55,8 @@
 	</nav>
 	<nav id="navbarToggleExternalContent" class="collapse">
 		<ul class="nav navbar-nav ">
-			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="#">Lista de
-					postos</a></li>
-			<li><a class="btn-sm btn bg-dark float-end border-2" style="width:30vw;color:white;" href="#">Atualização de
-					preços</a></li>
+            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="postos.php">Lista de postos</a></li>
+            <li><a class="btn-sm btn bg-dark float-end border-2" style="width:40vw;color:white;" href="autoriza.php">Atualização de preços</a></li>
 		</ul>
 	</nav>
 

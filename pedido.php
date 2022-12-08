@@ -25,12 +25,12 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Script do framework sweetalert -->
     <script>
-        function login() {
-            window.location.replace('index.php');
+        function autoriza() {
+            window.location.replace('autoriza.php');
         }
 
         function success(msg) {
-            timeout = setTimeout(login, 3500);
+            timeout = setTimeout(autoriza, 3500);
             Swal.fire(
                 'Tudo certo!',
                 msg,
@@ -70,7 +70,7 @@
             // echo $sql;
             if (mysqli_query($conn, $sql)) {
 
-                echo "<script>success('Cadastro efetuado com sucesso!');</script>";
+                echo "<script>success('Pedido cadastrado com sucesso!');</script>";
             } 
             else {
                 $msg = "Erro ao cadastrar usuário.";
