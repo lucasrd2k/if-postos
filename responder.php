@@ -17,12 +17,12 @@
             $diesels10 = $linha['diesels10'];
             $posto = $linha['posto'];
 
-            $sql = "UPDATE posto SET etanol = $etanol, gasolina = $gasolina, diesels500=$diesels5, diesels10 = $diesels10 WHERE id = $posto;";
+            $sql = "UPDATE posto SET etanol = $etanol, gasolina = $gasolina, diesels500=$diesels5, diesels10 = $diesels10 WHERE id = $id;";
             mysqli_query($conn, $sql);
         }
         $sql = "DELETE FROM pedido WHERE id = $id";
         mysqli_query($conn, $sql);
-        echo "<script>window.location.replace('autoriza.php');</script>";
+        //echo "<script>window.location.replace('autoriza.php');</script>";
     }
         
 ?>
