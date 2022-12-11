@@ -17,7 +17,7 @@
             $diesels10 = $linha['diesels10'];
             $posto = $linha['posto'];
 
-            $sql = "UPDATE posto SET etanol = $etanol, gasolina = $gasolina, diesels500=$diesels5, diesels10 = $diesels10 WHERE id = $id;";
+            echo $sql = "UPDATE posto SET etanol = $etanol, gasolina = $gasolina, diesels500=$diesels5, diesels10 = $diesels10 WHERE id = $posto;";
             mysqli_query($conn, $sql);
         }
         $sql = "DELETE FROM pedido WHERE id = $id";
