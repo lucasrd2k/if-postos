@@ -18,7 +18,7 @@ if (isset($_GET['resp'])) {
         $posto = $linha['posto'];
 
         // Edição do posto - edita todos os campos acima de zero (preenchidos)
-        
+
         $sql = "UPDATE posto SET ";
         $edit = false;
         if ($etanol > 0) {
@@ -53,5 +53,5 @@ if (isset($_GET['resp'])) {
     }
     $sql = "DELETE FROM pedido WHERE id = $id";
     mysqli_query($conn, $sql);
-    //echo "<script>window.location.replace('autoriza.php');</script>";
+    echo "<script>window.location.replace('autoriza.php');</script>";
 }
